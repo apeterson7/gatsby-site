@@ -41,7 +41,7 @@ jobs:
               echo "creating archive"
               ts=$(date "+%Y.%m.%d-%H.%M.%S")
               cd apeterson7.github.io
-              mkdir $(ts)
+              mkdir $ts
               cd ..
               ls -la apeterson7.github.io
               mv apeterson7.github.io/* apeterson7.github.io/$(ts)/
