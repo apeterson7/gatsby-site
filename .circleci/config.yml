@@ -32,8 +32,6 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" = "master" ]; then
               echo -e "Starting to deploy to Github Pages\n"
-              # git config --global user.email "builds@circleci.com"
-              # git config --global user.name "CircleCI"
               #using token clone gh-pages branch
               git clone --quiet --branch=$CIRCLE_BRANCH https://${GH_TOKEN}@github.com/$TARGET_REPO 
               echo "checkout out code"
@@ -44,7 +42,7 @@ jobs:
               mkdir $ts
               cd ..
               ls -la apeterson7.github.io
-              mv apeterson7.github.io/* apeterson7.github.io/$(ts)/
+              mv apeterson7.github.io/* apeterson7.github.io/$ts
               ls -la public 
               mv public/* apeterson7.github.io/
               ls -la apeterson7.github.io/
