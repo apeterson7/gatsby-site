@@ -40,3 +40,6 @@ jobs:
               mv apeterson7.github.io/* apeterson7.github.io/$(date "+%Y.%m.%d-%H.%M.%S")/
               ls public 
               mv public/* apeterson7.github.io/
+            else
+              echo "Not master branch, dry run only"
+            fi
