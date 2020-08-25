@@ -36,15 +36,18 @@ jobs:
               # git config --global user.name "CircleCI"
               #using token clone gh-pages branch
               git clone --quiet --branch=$CIRCLE_BRANCH https://${GH_TOKEN}@github.com/$TARGET_REPO 
-              ls apeterson7.github.io
+              echo "checkout out code"
+              ls -la
+              echo "creating archive"
               ts=$(date "+%Y.%m.%d-%H.%M.%S")
               cd apeterson7.github.io
               mkdir $(ts)
               cd ..
+              ls -la apeterson7.github.io
               mv apeterson7.github.io/* apeterson7.github.io/$(ts)/
-              ls public 
+              ls -la public 
               mv public/* apeterson7.github.io/
-              ls apeterson7.github.io/
+              ls -la apeterson7.github.io/
               cd apeterson7.github.io/
               git add .
               git commit -m "Circle CI Deployment ${ts}"
