@@ -53,7 +53,7 @@ jobs:
               cd apeterson7.github.io/
               git add .
               git commit -m "Circle CI Deployment ${temp}"
-              git push
+              git push -fq origin 
             else
               echo "Not master branch, dry run only"
             fi
