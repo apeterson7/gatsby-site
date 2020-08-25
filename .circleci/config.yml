@@ -35,7 +35,7 @@ jobs:
               #using token clone gh-pages branch
               git clone --quiet --branch=$CIRCLE_BRANCH https://${GH_TOKEN}@github.com/$TARGET_REPO 
               echo "checkout out code"
-              ls -la
+              ls -la apeterson7.github.io
 
               echo "creating archive"
               mv apeterson7.github.io/archive .
