@@ -38,13 +38,11 @@ jobs:
               ls -la
               echo "creating archive"
               ts=$(date "+%Y.%m.%d-%H.%M.%S")
-              cd apeterson7.github.io
-              mkdir $ts
-              cd ..
+              mkdir apeterson7.github.io/$ts
               ls -la apeterson7.github.io
-              mv apeterson7.github.io/* apeterson7.github.io/$ts
+              mv -v ./apeterson7.github.io/* apeterson7.github.io/$ts
               ls -la public 
-              mv public/* apeterson7.github.io/
+              mv -v ./public/* apeterson7.github.io/
               ls -la apeterson7.github.io/
               cd apeterson7.github.io/
               git add .
