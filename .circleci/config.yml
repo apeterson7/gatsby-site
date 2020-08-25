@@ -11,3 +11,42 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - welcome/run
+      build:
+        docker:
+          - image: circleci/node:10
+        working_directory: ~/gatsby-site
+        environment:
+          BRANCH: master
+          TARGET_REPO: apeterson7/apeterson7.github.io.git
+        steps:
+          # Download and cache dependencies
+          - checkout
+          - restore_cache:
+              keys:
+                # Find a cache corresponding to this specific package-lock.json
+                - v1-npm-deps-{{ checksum "package-lock.json" }}
+                # Fallback cache to be used
+                - v1-npm-deps-
+          - run:
+              name: Install Dependencies
+              command: npm install
+          - save_cache:
+              key: v1-npm-deps-{{ checksum "package-lock.json" }}
+              paths:
+                - ./node_modules
+          - run:
+              name: Gatsby Build
+              command: npm run build
+          - deploy:
+              name: Deploy static pages to Github Pages
+              command: |
+                if [ "${CIRCLE_BRANCH}" = "master" ]; then
+                  echo -e "Starting to deploy to Github Pages\n"
+                  # git config --global user.email "builds@circleci.com"
+                  # git config --global user.name "CircleCI"
+                  #using token clone gh-pages branch
+                  git clone --quiet --branch=$CIRCLE_BRANCH https://${GH_TOKEN}@github.com/$TARGET_REPO 
+                  ls apeterson7.github.io
+                  mv apeterson7.github.io/* apeterson7.github.io/$(date "+%Y.%m.%d-%H.%M.%S")/
+                  ls public 
+                  mv public/* apeterson7.github.io/
